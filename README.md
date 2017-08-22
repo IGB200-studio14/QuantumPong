@@ -1,2 +1,2 @@
-# QuantumMechanicsGame
-quantum mechanic game for igb200
+# QuantumPong
+It's pong.... but quantum
