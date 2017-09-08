@@ -14,7 +14,12 @@ public class Player : MonoBehaviour {
 	private float currentSpeed = 0;
 	public float maxSpeed = 10;
 
+	//the control scheme
 	public string upKey = "up";
+	public string shootKey = "right";
+
+	//the object we shoot
+	public GameObject laser;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +29,13 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		move();
+		shoot();
+	}
+
+	void shoot() {
+		if (Input.GetKeyDown(shootKey)) {
+			Instantiate(laser, this.transform.position, this.transform.rotation);
+		}
 	}
 
 	void move() {
