@@ -42,4 +42,13 @@ public class laser : MonoBehaviour {
 
 		this.transform.position = position;
 	}
+
+	void OnCollisionEnter2D(Collision2D coll) {
+		Debug.Log("collided");
+		if (coll.gameObject.tag == "laser") {
+			Debug.Log("collided");
+			Destroy(this.gameObject);
+		}
+	}
+
 }
