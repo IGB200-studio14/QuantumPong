@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
 	//the control scheme
 	public string upKey = "up";
 	public string shootKey = "right";
+	//is the player on the left of the screen?
+	public bool right;
+
 
 	//the object we shoot
 	public GameObject laser;
@@ -34,7 +37,13 @@ public class Player : MonoBehaviour {
 
 	void shoot() {
 		if (Input.GetKeyDown(shootKey)) {
-			Instantiate(laser, this.transform.position, this.transform.rotation);
+			GameObject laserObject = Instantiate(laser, this.transform.position, this.transform.rotation);
+			//if the player is on the right of the screen
+			if (right) {
+				laser laserScript = laserObject.GetComponent<laser>();
+				//change the direction the lasers travel
+				laserScript.speed = -laserScript.speed;
+			}
 		}
 	}
 
