@@ -24,6 +24,9 @@ public class Player : MonoBehaviour {
 	//the object we shoot
 	public GameObject laser;
 
+	//how big the laser that we shoot is. defaults to 1
+	public float charge = 1;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -36,14 +39,26 @@ public class Player : MonoBehaviour {
 	}
 
 	void shoot() {
-		if (Input.GetKeyDown(shootKey)) {
+		if (Input.GetKey(shootKey)) {
+			charge += 0.1f;
+		}
+
+		if (Input.GetKeyUp(shootKey)) {
 			GameObject laserObject = Instantiate(laser, this.transform.position, this.transform.rotation);
+			laser laserScript = laserObject.GetComponent<laser>();
+			//make sure we always give *some* charge
+			if (charge < 1) {
+				charge = 1;
+			}
+			laserScript.health = (int)charge;
+			
+
 			//if the player is on the right of the screen
 			if (right) {
-				laser laserScript = laserObject.GetComponent<laser>();
 				//change the direction the lasers travel
 				laserScript.speed = -laserScript.speed;
 			}
+			charge = 0;
 		}
 	}
 
