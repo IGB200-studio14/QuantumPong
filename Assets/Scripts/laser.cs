@@ -12,9 +12,9 @@ public class laser : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		//update power and health to be the same.
