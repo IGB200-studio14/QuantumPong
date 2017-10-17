@@ -23,9 +23,11 @@ public class Player : MonoBehaviour {
 
 	//the object we shoot
 	public GameObject laser;
+	public float fireTime = 0.0f;
+	public float fireRate = 0.5f;
 
 	//how big the laser that we shoot is. defaults to 1
-	public float charge = 1;
+	public float charge = 1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +37,9 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		move();
+
 		shoot();
+
 	}
 
 	void shoot() {
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour {
 				if(charge >= maxCharge){
 					charge = maxCharge;
 				}
+
 			}
 			if(!right && GameObject.Find("GameManager").GetComponent<GameManager>().playerOneCharge > 0){
 				charge += 0.15f;
@@ -60,7 +65,7 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyUp(shootKey)) {
+		if (Input.GetKeyUp(shootKey) && Time.time > fireTime) {
 
 			if(charge > 0){
 				GameObject laserObject = Instantiate(laser, this.transform.position, this.transform.rotation);
@@ -78,6 +83,8 @@ public class Player : MonoBehaviour {
 				}
 				charge = 0;
 			}
+			// Coodldown of shot
+			fireTime = Time.time + fireRate;
 		}
 	}
 
