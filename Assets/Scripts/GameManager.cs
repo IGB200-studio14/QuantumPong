@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject powerUp;
 
+	System.Random rand = new System.Random();
+	private int numPowerUps = 2;
+
 	//frames since the game started
 	private int frames;
 
@@ -48,7 +51,7 @@ public class GameManager : MonoBehaviour {
 		if (frames % (powerupTime * 60) == 0) {
 			GameObject temp = Instantiate(powerUp, new Vector3(0,0,0), this.transform.rotation);
 			//TODO get this to pick randomly from all possible powerups
-			temp.GetComponent<PowerUp>().id = 2;
+			temp.GetComponent<PowerUp>().id = rand.Next(1,numPowerUps + 1) ;
 		}
 		
 	}
