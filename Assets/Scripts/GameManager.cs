@@ -52,17 +52,22 @@ public class GameManager : MonoBehaviour {
 
 		powerUps();
 
-		//change the position of the sliders to match the position of the battery
+		/*
+		---------------
+		Slider position
+		---------------
+		*/
 		Vector3 p1BatteryPos = Camera.main.WorldToScreenPoint(playerOneBatteryObject.transform.position);
 		p1BatteryPos.y = Camera.main.WorldToScreenPoint(new Vector3(0, 2, 0)).y;
 
 		Vector3 p2BatteryPos = Camera.main.WorldToScreenPoint(playerTwoBatteryObject.transform.position);
 		p2BatteryPos.y = Camera.main.WorldToScreenPoint(new Vector3(0, 2, 0)).y;
+
 		playerOneSlider.transform.position = p1BatteryPos;
 		playerTwoSlider.transform.position = p2BatteryPos;
 
-		playerOneChargeSlider.transform.position = Camera.main.WorldToScreenPoint(new Vector3(10,-6,0));
-		playerTwoChargeSlider.transform.position = Camera.main.WorldToScreenPoint(new Vector3(-10, -6, 0));
+		playerOneChargeSlider.transform.position = Camera.main.WorldToScreenPoint(new Vector3(-10,-6,0));
+		playerTwoChargeSlider.transform.position = Camera.main.WorldToScreenPoint(new Vector3(10, -6, 0));
 	}
 
 	void powerUps() {

@@ -7,14 +7,38 @@ public class PowerUp : MonoBehaviour {
 	public int id = 0;
 	//should be only one(left, p1) or -1(right, p2)
 	public int player;
+
+	public Sprite Health;
+	public Sprite Shield;
+
+	SpriteRenderer sr;
+
 	// Use this for initialization
 	void Start () {
-	
+		sr = GetComponent<SpriteRenderer>();
+		sr.sprite = null;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		this.transform.localScale = new Vector3(10,10,0);
+		//only if it has no sprite;
+		//hacky way of doing this - should change this if we ever add more powerui
+		if (sr.sprite == null) {
+			switch (id) {
+				case 1:
+					sr.sprite = Health;
+					break;
+				case 2:
+					sr.sprite = Shield;
+					break;
+				default:
+					//just use the health as a default
+					sr.sprite = Health;
+					break;
+			}
+
+		}
 	}
 
 	void reduceBatteryCharge() {
