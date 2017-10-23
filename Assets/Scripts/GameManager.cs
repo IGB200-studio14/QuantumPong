@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
 		if (frames % (powerupTime * 60) == 0) {
 			GameObject temp = Instantiate(powerUp, new Vector3(0,0,0), this.transform.rotation);
 			//TODO get this to pick randomly from all possible powerups
-			temp.GetComponent<PowerUp>().id = 1;
+			temp.GetComponent<PowerUp>().id = 2;
 		}
 		
 	}

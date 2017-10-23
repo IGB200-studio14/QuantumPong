@@ -18,13 +18,22 @@ public class PowerUp : MonoBehaviour {
 	}
 
 	void reduceBatteryCharge() {
-		Debug.Log("player: " + player);
+		//Debug.Log("player: " + player);
 		if (player == -1) {
 			GameObject.Find("GameManager").GetComponent<GameManager>().playerOneBattery -= 5;
 		}else if (player == 1) {
 			GameObject.Find("GameManager").GetComponent<GameManager>().playerTwoBattery -= 5;
 		}
 	}
+
+    void applyShield () {
+        if (player == 1) {
+            GameObject.Find("PlayerOne").GetComponent<Player>().giveShield();
+        } else if (player == -1) {
+            GameObject.Find("PlayerTwo").GetComponent<Player>().giveShield();
+        }
+    }
+
 
 	public void OnCollisionEnter2D(Collision2D col) {
 		//only do stuff if we collide with a laser
@@ -38,6 +47,10 @@ public class PowerUp : MonoBehaviour {
 				case 1:
 					reduceBatteryCharge();
 					break;
+
+                case 2:
+                    applyShield();
+                    break;
 
 				default:
 					break;
