@@ -34,6 +34,7 @@ public class laser : MonoBehaviour {
 			GameObject.Find("GameManager").GetComponent<GameManager>().playerOneBattery += health;
 
 			Destroy(this.gameObject);
+        // Left Side
 		}else if (this.transform.position.x <= -12) {
 
 			//update the batteries charge
@@ -55,9 +56,19 @@ public class laser : MonoBehaviour {
 		if (coll.gameObject.tag == "laser") {
 			//damage the enemy
 			coll.gameObject.GetComponent<laser>().Damage(power);
-			//damage ourselves, just in case the enemy can't
-	//		Damage(coll.gameObject.GetComponent<laser>().power);
 		}
+
+        // deal 'damage' to the player, potentially stunning them
+        if (coll.gameObject.tag == "Player" || coll.gameObject.tag == "Player2") {
+            coll.gameObject.GetComponent<Player>().takeDamage(power*2);
+            Destroy(this.gameObject);
+        }
+        
+        // 'pop' the shield
+        if (coll.gameObject.tag == "Shield") {
+            coll.gameObject.transform.parent.GetComponent<Player>().hitShield();
+            Destroy(this.gameObject);
+        }    
 	}
 
 	public void Damage(int amt) {
